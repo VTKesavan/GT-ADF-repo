@@ -22,50 +22,6 @@ GT-ADF uses multi-head self-attention over graph-structured network data to capt
 local and global dependencies simultaneously, achieving state-of-the-art intrusion detection
 across three benchmark datasets.
 
-### Key results (CICIDS2017-SafeML)
-
-| Model | Accuracy | Precision | Recall | F1-Score | AUC |
-|---|---|---|---|---|---|
-| SVM | 85.2% | 84.6% | 83.1% | 84.6% | 86.1% |
-| Random Forest | 88.7% | 87.9% | 86.5% | 87.9% | 89.3% |
-| CNN-IDS | 90.4% | 89.8% | 88.4% | 89.8% | 91.2% |
-| LSTM | 91.6% | 90.9% | 89.7% | 90.9% | 92.5% |
-| GNN | 92.8% | 92.1% | 91.3% | 92.1% | 93.6% |
-| TADDY (2023) | 94.1% | 93.5% | 92.8% | 93.5% | 94.8% |
-| GraphBERT | 94.8% | 94.2% | 93.6% | 94.2% | 95.3% |
-| Federated GNN-IDS (2024) | 93.6% | 92.9% | 92.2% | 92.9% | 94.1% |
-| **GT-ADF (ours)** | **96.2%** | **97.0%** | **95.0%** | **95.7%** | **96.8%** |
-
-Full results for UNSW-NB15 and ToN-IoT: [`results/sample_outputs/reported_results.json`](results/sample_outputs/reported_results.json)
-
----
-
-## Architecture
-
-```
-Raw network traffic / EV charging session data
-            ↓
-    Data preprocessing
-    (Min-Max scaling, encoding, feature selection)
-            ↓
-    Graph construction  [Eqs. 5-6]
-    Nodes: EVs · Charging stations · Grid components
-    Edges: Data exchange · Power flow · Auth logs
-            ↓
-    4 x Graph Transformer layers  [Eqs. 1-4]
-    (8 attention heads, hidden dim = 128)
-            ↓
-    Semi-supervised anomaly detection
-    Hybrid loss: L_H = L_sup + lambda * L_unsup
-            ↓
-    Anomaly score [0,100]  +  XAI explanation
-    Normal (<30)  Suspicious (30-60)  Anomaly (>=60)
-```
-
-For full mathematical derivations see [`docs/architecture.md`](docs/architecture.md).
-
----
-
 ## Installation
 
 See [`INSTALL.md`](INSTALL.md) for full instructions (GPU/CPU, conda, Docker).
@@ -97,9 +53,7 @@ Datasets are not included in this repository — download them separately.
 Each subfolder has a `README.md` with exact file placement instructions.
 
 > **Why these datasets?** No large-scale labeled EV-charging-specific cybersecurity
-> dataset is publicly available. These benchmark IDS datasets represent diverse,
-> high-quality modern network attacks and allow standardized comparison with prior work.
-> This limitation is discussed in Section 5 of the paper.
+> dataset is publicly available. 
 
 ---
 
@@ -122,45 +76,6 @@ python scripts/train.py --config configs/cicids2017.yaml \
 ```
 
 > Synthetic data will not reproduce paper results — it only verifies the pipeline runs.
-
----
-
-## Full experiment pipeline
-
-```bash
-# Preprocess
-python scripts/preprocess.py --dataset cicids2017 \
-    --data_dir data/raw/CICIDS2017 --output_dir data/processed
-
-# Train
-python scripts/train.py --config configs/cicids2017.yaml
-
-# Evaluate
-python scripts/evaluate.py \
-    --checkpoint results/cicids2017/checkpoints/gt_adf_best.pt \
-    --config configs/cicids2017.yaml
-
-# Run all baselines
-python scripts/run_baselines.py --config configs/cicids2017.yaml
-```
-
----
-
-## Hyperparameters
-
-| Parameter | Value |
-|-----------|-------|
-| Transformer layers | 4 |
-| Attention heads (H) | 8 |
-| Hidden dimension | 128 |
-| Dropout | 0.2 |
-| Optimizer | Adam, lr = 0.001 |
-| Batch size | 64 |
-| Max epochs | 100 (early stopping, patience = 10) |
-| Labeled ratio | 20% of training nodes |
-| lambda_unsup | 0.5 |
-| k-NN neighbors | 5 |
-| Window size | 10 records/graph |
 
 ---
 
@@ -220,7 +135,6 @@ GT-ADF/
 
 - Results are from benchmark IDS datasets, not EV-charging-specific data (none is publicly available at scale).
 - Experiments are simulation-based; real hardware deployment is planned as future work.
-- Latency figures (Table 5) are hardware-specific (Intel Core i7, 16GB RAM, NVIDIA GPU).
 
 ---
 
