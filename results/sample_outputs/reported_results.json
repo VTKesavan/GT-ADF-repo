@@ -1,0 +1,62 @@
+{
+  "_description": "Reported evaluation results from the paper. These are the numbers the trained model should reproduce on the real datasets. Synthetic sample_data will give lower scores — these are reference targets only.",
+  "_note": "Results obtained on: Intel Core i7, 16GB RAM, NVIDIA GPU, Python 3.9, PyTorch 2.0",
+  "CICIDS2017": {
+    "model": "GT-ADF",
+    "dataset": "CICIDS2017-SafeML",
+    "split": "test (20%)",
+    "accuracy": 0.962,
+    "precision_macro": 0.970,
+    "recall_macro": 0.950,
+    "f1_macro": 0.957,
+    "roc_auc": 0.968,
+    "inference_latency_ms": 16.8,
+    "params_M": 5.2,
+    "flops_G": 3.7
+  },
+  "UNSW_NB15": {
+    "model": "GT-ADF",
+    "dataset": "UNSW-NB15",
+    "split": "test (20%)",
+    "accuracy": 0.944,
+    "precision_macro": 0.951,
+    "recall_macro": 0.938,
+    "f1_macro": 0.944,
+    "roc_auc": 0.953
+  },
+  "ToN_IoT": {
+    "model": "GT-ADF",
+    "dataset": "ToN-IoT",
+    "split": "test (20%)",
+    "accuracy": 0.936,
+    "precision_macro": 0.942,
+    "recall_macro": 0.929,
+    "f1_macro": 0.935,
+    "roc_auc": 0.948
+  },
+  "baselines_CICIDS2017": {
+    "SVM":           {"accuracy": 0.852, "f1_macro": 0.846, "roc_auc": 0.861, "latency_ms": 2100},
+    "Random Forest": {"accuracy": 0.887, "f1_macro": 0.879, "roc_auc": 0.893, "latency_ms": 2800},
+    "CNN-IDS":       {"accuracy": 0.904, "f1_macro": 0.898, "roc_auc": 0.912, "latency_ms": 12.5},
+    "LSTM":          {"accuracy": 0.916, "f1_macro": 0.909, "roc_auc": 0.925, "latency_ms": 15.3},
+    "GNN":           {"accuracy": 0.928, "f1_macro": 0.921, "roc_auc": 0.936, "latency_ms": 18.6},
+    "TADDY":         {"accuracy": 0.941, "f1_macro": 0.935, "roc_auc": 0.948, "latency_ms": 5600},
+    "GraphBERT":     {"accuracy": 0.948, "f1_macro": 0.942, "roc_auc": 0.953, "latency_ms": 22400},
+    "Federated GNN": {"accuracy": 0.936, "f1_macro": 0.929, "roc_auc": 0.941, "latency_ms": 6300},
+    "GT-ADF":        {"accuracy": 0.962, "f1_macro": 0.957, "roc_auc": 0.968, "latency_ms": 16.8}
+  },
+  "hyperparameters_used": {
+    "num_layers": 4,
+    "num_heads": 8,
+    "hidden_dim": 128,
+    "dropout": 0.2,
+    "lr": 0.001,
+    "batch_size": 64,
+    "max_epochs": 100,
+    "patience": 10,
+    "labeled_ratio": 0.20,
+    "lambda_unsup": 0.5,
+    "k_neighbors": 5,
+    "batch_window": 10
+  }
+}

@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# ── Sample data (auto-generated — see scripts/generate_sample_data.py) ─────
+sample_data/*.csv
+
+# ── Datasets (download separately — see data/raw/*/README.md) ──────────────
+data/raw/CICIDS2017/*.csv
+data/raw/UNSW_NB15/*.csv
+data/raw/ToN_IoT/*.csv
+data/processed/
+
+# ── Model checkpoints (too large for git — use Zenodo/HuggingFace) ─────────
+results/checkpoints/*.pt
+results/checkpoints/*.pth
+
+# Logs
+results/logs/
+*.log
+runs/
+wandb/
+tensorboard_logs/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Figures (auto-generated)
+results/figures/*.png
+results/figures/*.pdf
+results/figures/*.svg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+*.DS_Store
+
+# Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Temporary
+*.tmp
+*.bak

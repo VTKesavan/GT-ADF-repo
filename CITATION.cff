@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper as below."
+type: software
+title: "GT-ADF: Graph Transformer-Based Anomaly Detection Framework for Smart Grid EV Charging Stations"
+abstract: >
+  A Graph Transformer-based anomaly detection framework for securing smart grid
+  EV charging stations. Uses multi-head self-attention to capture local and global
+  dependencies in heterogeneous charging network graphs, achieving 96-97% accuracy
+  on CICIDS2017, UNSW-NB15, and ToN-IoT benchmark datasets.
+keywords:
+  - Graph Transformer
+  - Anomaly Detection
+  - EV Charging Stations
+  - Smart Grid Security
+  - Intrusion Detection
+  - Cyber Threats
+  - PyTorch Geometric
+references:
+  - type: article
+    title: "Securing Smart Grid EV Charging Stations using Graph Transformer-Based Anomaly Detection"
+    authors:
+      - name: "Thiruppathy Kesavan V"
+      - name: "Gopi R"
+      - name: "Md. Jakir Hossen"
+      - name: "Danalakshmi D"
+      - name: "Emerson Raja Joseph"
+    year: 2026

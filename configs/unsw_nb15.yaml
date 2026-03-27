@@ -1,0 +1,26 @@
+# UNSW-NB15 configuration
+dataset: unsw_nb15
+data_dir: data/raw/UNSW_NB15
+binary: false
+num_classes: 10
+hidden_dim: 128
+num_layers: 4
+num_heads: 8
+dropout: 0.2
+labeled_ratio: 0.20
+lambda_unsup: 0.5
+k_neighbors: 5
+batch_window: 10
+edge_method: knn
+lr: 0.001
+weight_decay: 1.0e-5
+batch_size: 64
+max_epochs: 100
+patience: 10
+threshold_t1: 30
+threshold_t2: 60
+seed: 42
+use_gpu: true
+num_workers: 2
+log_level: INFO
+output_dir: results/unsw_nb15

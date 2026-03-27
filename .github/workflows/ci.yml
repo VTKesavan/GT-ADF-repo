@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Cache pip
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+
+    - name: Install CPU-only PyTorch and PyG
+      run: |
+        pip install --upgrade pip
+        pip install torch==2.0.1+cpu torchvision==0.15.2+cpu \
+          --index-url https://download.pytorch.org/whl/cpu
+        pip install torch-geometric==2.3.1
+        pip install torch-scatter torch-sparse torch-cluster \
+          -f https://data.pyg.org/whl/torch-2.0.1+cpu.html
+
+    - name: Install remaining dependencies
+      run: |
+        pip install numpy pandas scikit-learn scipy matplotlib seaborn \
+          pyyaml tqdm networkx pytest pytest-cov
+
+    - name: Generate synthetic sample data
+      run: python scripts/generate_sample_data.py
+
+    - name: Run unit tests
+      run: pytest tests/ -v --cov=src --cov-report=term-missing
+
+    - name: Smoke test — preprocess sample data
+      run: |
+        python scripts/preprocess.py \
+          --dataset cicids2017 \
+          --data_dir sample_data \
+          --output_dir data/processed \
+          --binary
+
+    - name: Verify import chain
+      run: |
+        python -c "
+        from src.models.gt_adf import GTADF, HybridLoss
+        from src.models.graph_transformer import GraphTransformerLayer
+        from src.models.baselines import GNNBaseline, CNNBaseline, LSTMBaseline
+        from src.evaluation.metrics import compute_metrics
+        from src.data.graph_builder import GraphBuilder
+        from src.data.preprocessor import Preprocessor
+        print('All imports OK')
+        import torch
+        model = GTADF(in_channels=20, hidden_channels=32, out_channels=2,
+                      num_layers=2, num_heads=4)
+        x = torch.randn(10, 20)
+        ei = torch.tensor([[0,1,2,3,4,5,6,7,8,9],
+                            [1,2,3,4,5,6,7,8,9,0]], dtype=torch.long)
+        logits, emb, scores = model(x, ei)
+        assert logits.shape == (1, 2), f'Bad logits shape: {logits.shape}'
+        print(f'Model forward pass OK — logits {logits.shape}, emb {emb.shape}')
+        "
