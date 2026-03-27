@@ -61,3 +61,14 @@ htmlcov/
 # Temporary
 *.tmp
 *.bak
+
+# Large processed dataset files
+data/processed/
+data/raw/CICIDS2017/processed/
+data/raw/UNSW_NB15/processed/
+data/raw/ToN_IoT/processed/
+*.pt
+*.pth
+*.pkl
+*.h5
+*.hdf5
