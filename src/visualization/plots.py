@@ -1,15 +1,6 @@
 """
 Visualization functions for GT-ADF results.
 
-Generates:
-    - Detection accuracy comparison bar chart (Figure 7)
-    - Precision / Recall / F1 grouped bar chart (Figure 8)
-    - Attack type radar chart (Figure 9)
-    - ROC curves (Figure 10)
-    - Scalability analysis (Figure 11)
-    - Processing time comparison (Figure 12)
-    - Attention weight heatmap (Figure 13)
-    - Cross-dataset F1 validation (Figure 14)
 """
 
 import os
