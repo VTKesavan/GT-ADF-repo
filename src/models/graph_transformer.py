@@ -1,12 +1,6 @@
 """
 Graph Transformer Layer with multi-head self-attention.
 
-Implements the attention mechanism described in:
-    q_i = W_q * x_i,  k_i = W_k * x_i,  v_i = W_v * x_i
-    e_ij = (q_i^T k_j) / sqrt(d_k)
-    alpha_ij = exp(e_ij) / sum_{l in N(i)} exp(e_il)
-    h_i = sum_{j in N(i)} alpha_ij * v_j
-    h_tilde_i = Concat(h_i^(1), ..., h_i^(H)) * W_o
 """
 
 import math
