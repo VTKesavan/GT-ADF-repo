@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 """
-Standalone preprocessing script — reads raw CSVs and serializes
-processed PyG graphs to disk so training never re-processes raw data.
-
 Usage:
     python scripts/preprocess.py --dataset cicids2017 \
         --data_dir data/raw/CICIDS2017 --output_dir data/processed
