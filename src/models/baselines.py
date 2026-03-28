@@ -1,12 +1,5 @@
 """
 Baseline models for comparison with GT-ADF.
-
-Implements:
-    - GNN (Graph Convolutional Network)
-    - CNN-IDS (1D Convolutional Neural Network)
-    - LSTM-IDS
-    - SVM (scikit-learn wrapper)
-    - Random Forest (scikit-learn wrapper)
 """
 
 import torch
