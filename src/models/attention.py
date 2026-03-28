@@ -1,9 +1,6 @@
 """
 Standalone multi-head self-attention reference for GT-ADF.
 
-This module provides a pure-PyTorch (non-PyG) implementation of the
-attention mechanism described in Equations (1)–(4) of the paper,
-useful for testing, ablation, and educational reference.
 """
 
 import math
