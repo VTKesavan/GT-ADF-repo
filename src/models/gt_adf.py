@@ -2,8 +2,6 @@
 GT-ADF: Graph Transformer-based Anomaly Detection Framework
 Main model definition.
 
-Paper: "Securing Smart Grid EV Charging Stations using
-        Graph Transformer-Based Anomaly Detection"
 """
 
 import torch
