@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 """
-Generate small synthetic CSV files that mimic the structure of each
-benchmark dataset. These are NOT real network traffic — they are
-randomly generated with realistic column names and label distributions
-so that the full preprocessing -> graph-building -> training pipeline
-can be exercised without downloading the original datasets.
-
 Usage:
     python scripts/generate_sample_data.py
 
