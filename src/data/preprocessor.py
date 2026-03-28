@@ -1,12 +1,6 @@
 """
 Feature preprocessing pipeline for network intrusion detection datasets.
 
-Steps:
-    1. Drop constant / near-zero-variance columns
-    2. Handle infinities and NaN values
-    3. Drop high-correlation redundant features
-    4. One-hot encode categorical features
-    5. Min-Max normalization (as used in the paper)
 """
 
 import logging
