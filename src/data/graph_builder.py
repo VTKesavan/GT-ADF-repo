@@ -1,15 +1,6 @@
 """
 Graph construction pipeline for EV charging network representation.
 
-Converts tabular network traffic / IDS records into PyTorch Geometric
-Data objects, implementing:
-
-    EV_n(gc_j, cs_i) = 1 - if(CC_j, OS_i, LC_i)         [Eq. 5]
-    ED_n = 0.5 * [μ(de) + μ(pf_tot)] * (EM_i, r_ij)      [Eq. 6]
-    gc = Σ_i go*NA_i*Ec_i / Σ_i (RNC + ds_i) + hd_e(.)   [Eq. 7]
-
-For tabular IDS data, we construct a k-NN graph over feature space
-to approximate the communication topology of the EV network.
 """
 
 import logging
