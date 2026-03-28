@@ -1,12 +1,6 @@
 """
 Training loop for GT-ADF with semi-supervised hybrid loss.
 
-Implements:
-    - Supervised cross-entropy on labeled nodes
-    - Unsupervised consistency regularization on unlabeled nodes
-    - Early stopping on validation loss
-    - Subgraph batching for scalability
-    - Checkpoint saving
 """
 
 import os
